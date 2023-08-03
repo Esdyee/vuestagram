@@ -11,10 +11,12 @@
 				<span class="profile-name">{{ insta.name }}</span>
 			</div>
 			<div class="post-body" :class="insta.filter"
+				@click="$store.commit('addLike', insta.likes)"
 				:style="{ backgroundImage: `url(${insta.postImage})` }"
 			></div>
 			<div class="post-content">
-				<p>likes: {{ insta.likes }}</p>
+<!--				<p>likes: {{ insta.likes }}</p>-->
+				<p>likes: {{ $store.state.likes }}</p>
 				<p><strong>{{ insta.name }}</strong> {{ insta.content }}</p>
 				<p class="date">{{ insta.date }}</p>
 			</div>

@@ -13,9 +13,13 @@ import axios from 'axios';
 		</ul>
 		<img src="./assets/logo.png" class="logo"/>
 	</div>
+
 	<pre>
 		{{ content }} / {{ filter }}
 	</pre>
+	<h4>Age : {{ $store.state.age }}</h4>
+	<button @click="$store.commit('addAge', 2)">Add Age</button>
+
 	<Container :instaData="insta"
 	:activeMenu="activeMenu"
 	:selectedImage="selectedImage"
