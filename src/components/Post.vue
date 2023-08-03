@@ -10,7 +10,7 @@
 				:style="{ backgroundImage: `url(${insta.userImage})` }"></div>
 				<span class="profile-name">{{ insta.name }}</span>
 			</div>
-			<div class="post-body"
+			<div class="post-body" :class="insta.filter"
 				:style="{ backgroundImage: `url(${insta.postImage})` }"
 			></div>
 			<div class="post-content">

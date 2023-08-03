@@ -14,7 +14,7 @@ import axios from 'axios';
 		<img src="./assets/logo.png" class="logo"/>
 	</div>
 	<pre>
-		{{ content }}
+		{{ content }} / {{ filter }}
 	</pre>
 	<Container :instaData="insta"
 	:activeMenu="activeMenu"
@@ -39,13 +39,20 @@ import instaData from "@/assets/instaData";
 
 export default {
 	name: 'App',
+	mounted() {
+		this.emitter.on('emitFire', (value) => {
+			console.log("###AppVueEmitFire")
+			this.filter = value;
+		})
+	},
 	data() {
 		return {
 			insta: instaData,
 			moreCount: 0,
 			activeMenu: 0,
 			selectedImage: null,
-			content: "Test"
+			content: "Test",
+			filter: ""
 		}
 	},
 	components: {},
@@ -86,12 +93,14 @@ export default {
 					date: "May 15",
 					liked: false,
 					content: this.content,
-					filter: "perpetua"
+					filter: this.filter
 				}
 			)
+
 			this.selectedImage = null;
 			this.writedText = this.content;
 			this.activeMenu = 0;
+			this.filter = "";
 		},
 		updateContent(value) {
 			this.content = value;

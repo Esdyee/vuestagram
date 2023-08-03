@@ -11,7 +11,7 @@ import FilterBox from "@/components/FilterBox.vue";
 
 		<!-- 필터선택페이지 -->
 		<div v-if="activeMenu === 1">
-			<div class="upload-image"
+			<div :class="selectedFilter" class="upload-image"
 			:style="{backgroundImage: `url(${selectedImage})`}"
 			></div>
 			<div class="filters">
@@ -26,7 +26,7 @@ import FilterBox from "@/components/FilterBox.vue";
 
 		<!-- 글작성페이지 -->
 		<div v-if="activeMenu === 2">
-			<div class="upload-image"
+			<div class="upload-image" :class="selectedFilter"
 				:style="{backgroundImage: `url(${selectedImage})`}"
 			></div>
 			<div class="write">
@@ -46,7 +46,8 @@ export default {
 		return {
 			filterList: [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson",
 				"inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua",
-				"reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"]
+				"reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+			selectedFilter: ""
 		}
 	},
 	props: {
@@ -56,7 +57,9 @@ export default {
 		writedText: String,
 	},
 	mounted() {
-		console.log(this.instaData, "###insta");
+		this.emitter.on('emitFire', (value) => {
+			this.selectedFilter = value;
+		})
 	}
 }
 </script>

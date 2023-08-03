@@ -7,7 +7,7 @@
 		:style="{ backgroundImage: `url(${selectedImage})`}"
 	>
 		<slot style="color: black"></slot>
-		<button @click="fire">버튼</button>
+		<button @click="fire">적용</button>
 	</div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 	},
 	methods: {
 		fire() {
-			// this.emitter.emit('test', this.filter);
+			this.emitter.emit('emitFire', this.filter);
 		}
 	}
 }
