@@ -14,11 +14,15 @@ import axios from 'axios';
 		<img src="./assets/logo.png" class="logo"/>
 	</div>
 
+
 	<pre>
-		{{ content }} / {{ filter }}
+		now : {{ now() }}
+		now2 : {{ now2 }}
+		testCount : {{ testCount }}
+		{{ name }}, {{ age }}
 	</pre>
-	<h4>Age : {{ $store.state.age }}</h4>
-	<button @click="$store.commit('addAge', 2)">Add Age</button>
+	<button @click="++testCount">테스트 버튼</button>
+
 
 	<Container :instaData="insta"
 	:activeMenu="activeMenu"
@@ -40,6 +44,7 @@ import axios from 'axios';
 
 <script>
 import instaData from "@/assets/instaData";
+import {mapState} from "vuex";
 
 export default {
 	name: 'App',
@@ -53,14 +58,27 @@ export default {
 		return {
 			insta: instaData,
 			moreCount: 0,
-			activeMenu: 0,
+			activeMenu: 3,
 			selectedImage: null,
 			content: "Test",
-			filter: ""
+			filter: "",
+			testCount: 0,
 		}
 	},
-	components: {},
+	computed: {
+		now2() {
+			// method와 달리 computed는 캐싱을 하기 때문에
+			// this.now2를 호출할 때마다
+			// new Date()를 return하지 않고
+			// 캐싱된 값을 리턴한다.
+			return new Date();
+		},
+		...mapState(['name', 'age'])
+	},
 	methods: {
+		now() {
+			return new Date();
+		},
 		more() {
 			axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
 				.then((res) => {

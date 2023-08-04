@@ -1,6 +1,7 @@
 <script setup>
 import Post from "./Post.vue";
 import FilterBox from "@/components/FilterBox.vue";
+import MyPage from "@/components/MyPage.vue";
 </script>
 
 <template>
@@ -34,6 +35,10 @@ import FilterBox from "@/components/FilterBox.vue";
 					@input="$emit('update:content', $event.target.value)"
 					class="write-box"></textarea>
 			</div>
+		</div>
+
+		<div v-if="activeMenu === 3">
+			<MyPage />
 		</div>
 
 	</div>
